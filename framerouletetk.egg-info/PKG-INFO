@@ -1,0 +1,87 @@
+Metadata-Version: 2.4
+Name: framerouletetk
+Version: 0.1.0
+Summary: Data table made with components of the Tkinter library
+Author-email: Aldo <aldomalaca@outlook.com>
+License: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: User Interfaces
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >=3.12.0
+Description-Content-Type: text/markdown
+License-File: LICENSE.txt
+Dynamic: license-file
+
+# framerouletetk
+
+The package is specifically designed to address the need for a container that allows multiple instances of Frame objects in Tkinter. The system is optimized to display only one instance at a time and delete the last instance to save memory.
+Because it's a simple system, users may encounter some limitations. If you want to modify the package code to meet your needs, feel free to do so. In the end, I only programmed this for a personal project and have no interest in making it too complex.
+
+## Package structure
+
+## Installation
+```text
+pip install . # local installation
+pip install . e #developer installation
+```
+## Implementantion examples
+
+# Declare libraries
+```python
+from framerouletetk.rouletetk import Roulete
+from tkinter import Frame,Tk,Label
+from tkinter import Button
+```
+# Create objects that inherit frame or create Frame objets
+```python
+class FrameOne(Frame):
+    def __init__(self, parent:Frame):
+        super().__init__(parent)
+        Label(self, text="Este es el Frame Uno").pack()
+        Button(self, name="button test", text="button text").pack()
+
+class FrameTwo(Frame):
+    def __init__(self, parent:Frame):
+        super().__init__(parent)
+        Label(self, text="Este es el Frame Dos").pack(padx=20, pady=20)
+
+root = Tk()
+rt = Roulete(parent=root)
+rt.pack(fill="both", expand=True)
+
+#Alternatively, you can create frames directly and instantiate objects without using inheritance.
+
+frameThree = Frame(rt)
+lb = Label(frameThree, text="Este es el Frame Tres")
+lb.pack()
+lb.config(background="blue")
+bt = Button(frameThree)
+bt.pack()
+bt.config(text="button")
+```
+
+# Insert the objects into the Roulette object and select the main Frame
+```python
+rt.insert(tag_name="0", frame=FrameOne)  
+rt.insert(tag_name="1", frame=FrameTwo)
+rt.insert(tag_name="2", frame=frameThree)
+    
+rt.main_frame("1")
+```
+# Change the Frame with "turn_towards(tag_name)"
+```python
+root.after(2000, lambda: rt.turn_towars_at("0"))
+root.after(4000, lambda: rt.turn_towars_at("1"))
+root.after(4000, lambda: rt.turn_towars_at("2"))
+   
+root.mainloop()
+```
+# Output
+
+![alt text](sample_images/sample2.png)
+![alt text](sample_images/sample3.png)
+![alt text](sample_images/sample2.png)

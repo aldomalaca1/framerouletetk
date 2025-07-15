@@ -1,0 +1,2 @@
+[console_scripts]
+framerouletetk-main = framerouletetk.rouletetk:main
